@@ -9,6 +9,31 @@ function App() {
 
   return (
     <>
+      <div style={{ display: "flex", gap: `10px`, zIndex: `-1` }}>
+        {data.map((movie, index) => {
+          return (
+            <div key={index}>
+              <button
+                style={{
+                  width: `150px`,
+                  height: `50px`,
+                  backgroundColor: `black`,
+                  color: `white`,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: `10px`,
+                }}
+                onClick={() => {
+                  setSelectedMovie(movie);
+                  setBackgroundImage(movie.background);
+                }}
+              >
+                <h1 key={index}>{movie.name}</h1>
+              </button>
+            </div>
+          );
+        })}
+      </div>
       <div
         style={{
           display: "flex",
@@ -18,81 +43,65 @@ function App() {
           backgroundPosition: "center",
           minHeight: "100vh",
           width: "80vh",
+          objectPosition: `top`,
+          borderRadius: `10px`,
+          zIndex: `-1`,
         }}
       >
         {selectedMovie === null ? (
-          <>
-            {data.map((movie, index) => {
-              return (
-                <div key={index}>
-                  <div>
-                    <button
-                      onClick={() => {
-                        setSelectedMovie(movie);
-                        setBackgroundImage(movie.background);
-                      }}
-                    >
-                      <h1 key={index}>{movie.name}</h1>
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-            <button style={{ width: `150px`, height: `50px` }}>
+          <div style={{ justifyContent: "center" }}>
+            <button
+              style={{
+                width: `150px`,
+                height: `50px`,
+                backgroundColor: `black`,
+                color: `white`,
+                marginTop: `10vh`,
+                borderRadius: `10px`,
+              }}
+            >
               <h2>PLEASE CHOOSE A FILM</h2>
             </button>
-          </>
+          </div>
         ) : (
-          <>
-            {data.map((movie, index) => {
-              return (
-                <div key={index}>
-                  <div>
-                    <button
-                      onClick={() => {
-                        setSelectedMovie(movie);
-                        setBackgroundImage(movie.background);
-                      }}
-                    >
-                      <h1 key={index}>{movie.name}</h1>
-                    </button>
-                  </div>
-                  {/* {selectedMovie.name === movie.name && (
-                  <>
-                    <div
-                      className="movieimage"
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+
+                alignItems: "center",
+                justifyContent: "center",
+                gap: `10px`,
+              }}
+            >
+              {selectedMovie.actors.map((actor, actorIndex) => {
+                return (
+                  <div key={actorIndex}>
+                    <p style={{ color: `white` }}>{actor.name}</p>
+                    <img
+                      src={actor.picture}
+                      alt=""
                       style={{
-                        display: "flex",
-                        position: "relative",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
+                        width: `15vh`,
+                        height: `15vh`,
+                        objectFit: `cover`,
+                        objectPosition: `top`,
+                        border: "2px solid white",
+                        borderRadius: "10px",
                       }}
-                    >
-                      {movie.actors.map((actor, actorIndex) => {
-                        return (
-                          <div key={actorIndex}>
-                            <p style={{ color: "white" }}>{actor.name}</p>
-                            <img
-                              src={actor.picture}
-                              alt=""
-                              style={{
-                                width: "100px",
-                                height: "100px",
-                                objectFit: "cover",
-                                objectPosition: "50% 0%",
-                              }}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </>
-                )} */}
-                </div>
-              );
-            })}
-          </>
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         )}
       </div>
     </>
