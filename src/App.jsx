@@ -43,20 +43,21 @@ function App() {
             </button>
           </>
         ) : (
-          data.map((movie, index) => {
-            return (
-              <div key={index}>
-                <div>
-                  <button
-                    onClick={() => {
-                      setSelectedMovie(movie);
-                      setBackgroundImage(movie.background);
-                    }}
-                  >
-                    <h1 key={index}>{movie.name}</h1>
-                  </button>
-                </div>
-                {selectedMovie.name === movie.name && (
+          <>
+            {data.map((movie, index) => {
+              return (
+                <div key={index}>
+                  <div>
+                    <button
+                      onClick={() => {
+                        setSelectedMovie(movie);
+                        setBackgroundImage(movie.background);
+                      }}
+                    >
+                      <h1 key={index}>{movie.name}</h1>
+                    </button>
+                  </div>
+                  {/* {selectedMovie.name === movie.name && (
                   <>
                     <div
                       className="movieimage"
@@ -87,10 +88,11 @@ function App() {
                       })}
                     </div>
                   </>
-                )}
-              </div>
-            );
-          })
+                )} */}
+                </div>
+              );
+            })}
+          </>
         )}
       </div>
     </>
