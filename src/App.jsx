@@ -1,9 +1,12 @@
 import { useState } from "react";
 import data from "./assets/data.json";
+import { useNavigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import "./App.css";
 console.log(data);
 function App() {
+  const navigate = useNavigate();
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState("");
 
@@ -50,7 +53,7 @@ function App() {
       >
         {selectedMovie === null ? (
           <div style={{ justifyContent: "center" }}>
-            <button
+            <h2
               style={{
                 width: `150px`,
                 height: `50px`,
@@ -58,10 +61,12 @@ function App() {
                 color: `white`,
                 marginTop: `10vh`,
                 borderRadius: `10px`,
+                textAlign: `center`,
+                paddingTop: `20px`,
               }}
             >
-              <h2>PLEASE CHOOSE A FILM</h2>
-            </button>
+              PLEASE CHOOSE A FILM
+            </h2>
           </div>
         ) : (
           <div
@@ -104,8 +109,22 @@ function App() {
           </div>
         )}
       </div>
+      <button
+        onClick={() => window.location.reload()}
+        style={{ display: `flex`, justifyContent: "center" }}
+      >
+        Back
+      </button>
     </>
   );
 }
 
-export default App;
+function Root() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+export default Root;
